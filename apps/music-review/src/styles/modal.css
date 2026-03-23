@@ -1,0 +1,51 @@
+:root:has(:modal) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+dialog {
+  /* Safariで表示に不具合が出るので明示する必要がある */
+  position: fixed; 
+  /* 中央寄せのための設定 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* inset: 0 を削除して、幅・高さを明示的に設定 */
+  width: min(90vw, 600px); /* 最大幅を設定 */
+  max-height: 40vh;
+  margin: 0; /* ブラウザデフォルトのmarginをリセット */
+  overscroll-behavior-block: contain;
+  transition-duration: 300ms;
+  transition-property: display, overlay, opacity, transform;
+  transition-timing-function: ease-out;
+  transition-behavior: allow-discrete;
+  overflow: auto;
+}
+
+dialog::backdrop {
+  background-color: oklch(from var(--black) l c h / 50%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition-duration: inherit;
+  transition-property: opacity;
+  transition-timing-function: inherit;
+}
+
+@starting-style {
+  dialog:modal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95); /* スケールアニメーションを追加 */
+  }
+  dialog:modal::backdrop {
+    opacity: 0;
+  }
+}
+
+dialog:not(:modal) {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+dialog:not(:modal)::backdrop {
+  opacity: 0;
+}

@@ -1,0 +1,26 @@
+.notFound__wrap {
+  --block-size: 85svh;
+
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  container-type: inline-size;
+  block-size: var(--block-size);
+}
+
+.notFound__message {
+  --font-size: 10cqi;
+
+  font-size: var(--font-size);
+  font-weight: bolder;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .notFound__wrap {
+    --block-size: 65svh;
+  }
+  .notFound__message {
+    --font-size: 5.5cqi;
+  }
+}

@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model MusicReviewUser {
+  id         String      @id @default(uuid()) @db.Uuid
+  authUserId String?     @unique @map("auth_user_id") @db.Uuid
+  email      String      @unique @db.VarChar(255)
+  nickname   String      @db.VarChar(80)
+  role       String      @default("member") @db.VarChar(20)
+  reviews    MusicReview[]
+  createdAt  DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("music_review_users")
+}
+
+model MusicReview {
+  id            String                 @id @default(uuid()) @db.Uuid
+  userId        String?                @map("user_id") @db.Uuid
+  user          MusicReviewUser?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  postedAt      DateTime               @map("posted_at") @db.Date
+  authorName    String                 @map("author_name") @db.VarChar(80)
+  artistName    String                 @map("artist_name") @db.VarChar(255)
+  albumName     String?                @map("album_name") @db.VarChar(255)
+  releaseDate   String?                @map("release_date") @db.VarChar(40)
+  trackName     String?                @map("track_name") @db.VarChar(255)
+  labelName     String?                @map("label_name") @db.VarChar(255)
+  genre         String?                @db.VarChar(40)
+  jacketUrl     String?                @map("jacket_url") @db.Text
+  embedProvider String?                @map("embed_provider") @db.VarChar(40)
+  embedUrl      String?                @map("embed_url") @db.Text
+  body          String                 @db.Text
+  references    MusicReviewReference[]
+  createdAt     DateTime               @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime               @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([postedAt(sort: Desc)], map: "idx_music_reviews_posted_at")
+  @@index([userId], map: "idx_music_reviews_user_id")
+  @@map("music_reviews")
+}
+
+model MusicReviewReference {
+  id        String      @id @default(uuid()) @db.Uuid
+  reviewId  String      @map("review_id") @db.Uuid
+  review    MusicReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  title     String      @db.VarChar(255)
+  url       String      @db.Text
+  sortOrder Int         @default(0) @map("sort_order")
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([reviewId, sortOrder], map: "idx_music_review_references_review_sort")
+  @@map("music_review_references")
+}

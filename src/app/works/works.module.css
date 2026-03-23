@@ -1,0 +1,134 @@
+
+
+.artwork__wrapper {
+  --margin-block-start: 1rem;
+
+  display: grid;
+  justify-content: center;
+  margin-block-start: var(--margin-block-start);
+  transition-timing-function: ease-in;
+  transition-duration: 500ms;
+  /* FV付近のフェードインがSPでカクつくため */
+}
+
+@media screen and (min-width: 768px) {
+  .artwork__wrapper {
+    --margin-block-start: 3rem;
+
+    transition-duration: 800ms;
+    /* PCのみdurationを変更 */
+    transition-timing-function: inherit;
+  }
+}
+
+.artwork__wrapper + .artwork__wrapper {
+  margin-block-start: 16rem;
+}
+
+@media screen and (min-width: 768px) {
+  .artwork__wrapper + .artwork__wrapper {
+    margin-block-start: 40svh;
+  }
+}
+
+.artwork__wrapper:not(:has(.artwork__info)) {
+  margin-block-start: 3rem;
+}
+
+.artwork__info {
+  --column-gap: 0.8rem;
+
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+  'ttl date'
+  'venue venue';
+  align-items: baseline;
+  column-gap: var(--column-gap);
+  margin-inline-start: 0.5em;
+  font-weight: 600;
+  min-block-size: 1px;
+}
+
+@media screen and (min-width: 768px) {
+  .artwork__info {
+    --column-gap: 1.5rem;
+
+    grid-template-areas: 'ttl date venue';
+    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: 1fr;
+  }
+}
+
+
+.artwork__ttl,
+.artwork__date,
+.artwork__venue {
+  inline-size: fit-content;
+  font-weight: 600;
+}
+
+.artwork__date,
+.artwork__venue {
+  --font-size: 1rem;
+
+  font-size: var(--font-size);
+  font-weight: 350;
+}
+
+@media screen and (min-width: 768px) {
+  .artwork__date,
+  .artwork__venue {
+    --font-size: 1.4rem;
+  }
+}
+
+.artwork__ttl {
+  grid-area: ttl;
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .artwork__ttl {
+    font-size: 2rem;
+  }
+}
+
+.artwork__date {
+  grid-area: date;
+}
+
+.artwork__venue {
+  --margin-block-start: -0.25rem;
+
+  grid-area: venue;
+  margin-block-start: var(--margin-block-start);
+}
+
+@media screen and (min-width: 768px) {
+  .artwork__venue {
+    --margin-block-start: 0;
+  }
+}
+
+.artwork__img {
+  display: block;
+  margin-block-start: -0.5rem;
+  pointer-events: none;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -moz-touch-callout:none;
+  -moz-user-select:none;
+  user-select:none;
+}
+
+@media screen and (min-width: 768px) {
+  .artwork__img {
+    margin-block-start: 1rem;
+    max-inline-size: 1000px;
+    max-block-size: calc(90vh - 2rem);
+    object-fit: contain;
+    block-size: auto;
+  }
+}

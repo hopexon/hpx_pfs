@@ -1,0 +1,42 @@
+{
+  "CM": {
+    "rootIndex": 0,
+    "intervals": [0, 2, 4, 5, 7, 9, 11]
+  },
+  "CM Penta": {
+    "rootIndex": 0,
+    "intervals": [0, 2, 4, 7, 9]
+  },
+  "Cm Penta": {
+    "rootIndex": 0,
+    "intervals": [0, 3, 5, 7, 10]
+  },
+  "D Major": {
+    "rootIndex": 2,
+    "intervals": [0, 2, 4, 5, 7, 9, 11]
+  },
+  "EM Penta": {
+    "rootIndex": 4,
+    "intervals": [0, 2, 4, 7, 9]
+  },
+  "Em Penta": {
+    "rootIndex": 4,
+    "intervals": [0, 3, 5, 7, 10]
+  },
+  "AM Penta": {
+    "rootIndex": 9,
+    "intervals": [0, 2, 4, 7, 9]
+  },
+  "Am Penta": {
+    "rootIndex": 9,
+    "intervals": [0, 3, 5, 7, 10]
+  },
+  "GM": {
+    "rootIndex": 7,
+    "intervals": [0, 2, 4, 5, 7, 9, 11]
+  },
+  "Em Harmo": {
+    "rootIndex": 4,
+    "intervals": [0, 2, 3, 5, 7, 8, 11]
+  }
+}

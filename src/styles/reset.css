@@ -1,0 +1,51 @@
+/* Box sizing */
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+:where(body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) {
+  margin: 0;
+  padding: 0;
+}
+
+/* Default body settings */
+:where(body) {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Lists (remove bullets & spaces) */
+:where(ul[role="list"], ol[role="list"]) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Images & media */
+:where(img, picture, video, canvas, svg) {
+  display: block;
+  max-width: 100%;
+}
+
+/* Buttons & inputs inherit font */
+:where(input, button, textarea, select) {
+  font: inherit;
+  margin: 0;
+}
+
+/* Remove textarea resizing (optional) */
+/* :where(textarea) { resize: none; } */
+
+/* Remove animations for reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  :where(html:focus-within) {
+    scroll-behavior: auto;
+  }
+  :where(*, *::before, *::after) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
