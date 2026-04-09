@@ -172,7 +172,7 @@ Fret
 .fret__item {
   display: grid;
   place-items: center;
-  inline-size: calc((40 / 16) * 1rem);
+  inline-size: calc((32 / 16) * 1rem);
   block-size: calc((30 / 16) * 1rem);
   border: 1px solid var(--black);
   border-collapse: collapse;
@@ -204,9 +204,9 @@ Fret
 .number__item {
   position: relative;
   padding-block-start: calc((5 / 16) * 1rem);
-  inline-size: calc((40 / 16) * 1rem);
+  inline-size: calc((32 / 16) * 1rem);
   block-size: calc((30 / 16) * 1rem);
-  font-size: calc((16 / 16) * 1rem);
+  font-size: calc((14 / 16) * 1rem);
   font-weight: 700;
   text-align: center;
 }

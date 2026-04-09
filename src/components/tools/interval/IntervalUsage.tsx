@@ -51,6 +51,10 @@ export default function IntervalUsage() {
         </AccordionWithAnim>
         <AccordionWithAnim defaultOpen={false} summary='◯ リリースノート'>
           <dl className='acc__with__anim__dl'>
+            <dt className='acc__with__anim__dt'>2026-04-09</dt>
+            <dd className='acc__with__anim__dd'><span>・</span>SPレイアウトでのフレット横幅を縮小しました</dd>
+          </dl>
+          <dl className='acc__with__anim__dl'>
             <dt className='acc__with__anim__dt'>2026-03-21</dt>
             <dd className='acc__with__anim__dd'><span>・</span>Intervalモードおよび付随する機能を実装しました<br /><span>・</span>使い方、リリースノートを追加しました<br /><span>・</span>デプロイ環境をAWS S3 + Cloudfront から Vercel へ移行しました</dd>
           </dl>
