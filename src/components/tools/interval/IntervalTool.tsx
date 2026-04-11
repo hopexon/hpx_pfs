@@ -409,7 +409,7 @@ export function IntervalTool({
               const pitchIndex = mod12(rootIndex + fretNo); // calculate each fret's pitch index from rootIndex
               const note = pitchNames[pitchIndex]; // get pitch name from pitchIndex
 
-              // interval display mode: show degree names relative to the clicked fret
+              // interval mode: show degree names relative to the clicked fret
               if (isIntervalMode && intervalModeRootPitch !== null) {
                 const semitoneDistance = pitchIndex - intervalModeRootPitch;
                 const intervalName = getIntervalName(semitoneDistance);
@@ -504,20 +504,22 @@ export function IntervalTool({
         <span className={styles.mode__rootname}>Root: {intervalRootName}</span>
       </h2>
     </div>
-  ) : null;
+  ) : (
+    <div className={styles.mode__name}>
+      <h2>MODE: Normal</h2>
+    </div>
+  );
 
   return (
     <div className={styles.content__wrap}>
-      <div
-        className={`${styles.layout__selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        <div className={styles.selects__ttl}>
+      <div className={`${styles.selector__wrap} ${styles.handedness__selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}>
+        <div className={styles.selector__ttl}>
           <h2>Layout</h2>
         </div>
-        <div className={styles.select__layout}>
+        <div className={`${styles.selector__twoButtons} ${styles.selector__handedness}`}>
           <button
             type="button"
-            className={`${styles.select__btn} ${styles.layout__btn} ${handedness === "left" ? styles.js__layout__active : ""}`}
+            className={`${styles.select__btn} ${styles.handedness__btn} ${handedness === "left" ? styles.js__handedness__active : ""}`}
             disabled={isIntervalMode}
             onClick={() => handleHandednessChange("left")}
           >
@@ -525,7 +527,7 @@ export function IntervalTool({
           </button>
           <button
             type="button"
-            className={`${styles.select__btn} ${styles.layout__btn} ${handedness === "right" ? styles.js__layout__active : ""}`}
+            className={`${styles.select__btn} ${styles.handedness__btn} ${handedness === "right" ? styles.js__handedness__active : ""}`}
             disabled={isIntervalMode}
             onClick={() => handleHandednessChange("right")}
           >
@@ -534,95 +536,69 @@ export function IntervalTool({
         </div>
       </div>
 
-      <div
-        className={`${styles.selects__ttl} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        <h2>Strings：{stringCount}</h2>
-      </div>
-      <div className={styles.strings__number__selector__wrap}>
-        <button
-          type="button"
-          className={`${styles.select__btn} ${styles.strings__number__btn}`}
-          disabled={isIntervalMode || stringCount >= 9}
-          onClick={() => handleChangeStringCount(+1)}
-        >
-          +
-        </button>
-        <button
-          type="button"
-          className={`${styles.select__btn} ${styles.strings__number__btn}`}
-          disabled={isIntervalMode || stringCount <= 4}
-          onClick={() => handleChangeStringCount(-1)}
-        >
-          -
-        </button>
-      </div>
-
-      <div
-        className={`${styles.selects__ttl} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        <h2>Root</h2>
-      </div>
-      <div
-        className={`${styles.root__selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        <AnimatePresence>
-          {stringNumbers.map((stringNo) => (
-            <motion.div
-              key={`root_selector_${stringNo}`}
-              className={styles.root__selector}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              <div
-                className={styles.root__selector__label}
-              >{`Str ${stringNo}`}</div>
-              <select
-                className={`${styles.select__btn} ${styles.root__select__btn}`}
-                value={selectedStringRoots[stringNo - 1] ?? 0}
-                disabled={isIntervalMode}
-                onChange={(event) =>
-                  handleRootChange(stringNo, Number(event.target.value))
-                }
-              >
-                {pitchNames.map((pitch, idx) => (
-                  <option key={`${stringNo}_${pitch}`} value={idx}>
-                    {`${pitch}`}
-                  </option>
-                ))}
-              </select>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-
-      {/* activate if presets(other than standard) is mounted */}
-      <div
-        className={`${styles.selects__ttl} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        <h2>Tuning Preset</h2>
-      </div>
-      <div
-        className={`${styles.select__preset} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        {presetNames.map((tuningName) => (
+      <div className={`${styles.selector__wrap} ${styles.strings__number__selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}>
+        <div className={styles.selector__ttl}>
+          <h2>Strings：{stringCount}</h2>
+        </div>
+        <div className={`${styles.btns__wrap} ${styles.selector__twoButtons} ${styles.selector__strings__number}`}>
           <button
-            key={tuningName}
             type="button"
-            className={`${styles.select__btn} ${styles.preset__btn}`}
-            disabled={isIntervalMode}
-            onClick={() => handleTuningClick(tuningName)}
+            className={`${styles.select__btn} ${styles.strings__number__btn}`}
+            disabled={isIntervalMode || stringCount >= 9}
+            onClick={() => handleChangeStringCount(+1)}
           >
-            {tuningName}
+            +
           </button>
-        ))}
+          <button
+            type="button"
+            className={`${styles.select__btn} ${styles.strings__number__btn}`}
+            disabled={isIntervalMode || stringCount <= 4}
+            onClick={() => handleChangeStringCount(-1)}
+          >
+            -
+          </button>
+        </div>
       </div>
 
-      <div
-        className={`${styles.fret__map__outer} ${isIntervalMode ? styles.fret__map__interval : ""}`}
-      >
+      <div className={`${styles.selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}>
+        <div className={styles.selector__ttl}>
+          <h2>Root</h2>
+        </div>
+        <div className={styles.root__selector__wrap}>
+          <AnimatePresence>
+            {stringNumbers.map((stringNo) => (
+              <motion.div
+                key={`root_selector_${stringNo}`}
+                className={styles.root__selector}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <div
+                  className={styles.root__selector__label}
+                >{`Str ${stringNo}`}</div>
+                <select
+                  className={`${styles.select__btn} ${styles.root__select__btn}`}
+                  value={selectedStringRoots[stringNo - 1] ?? 0}
+                  disabled={isIntervalMode}
+                  onChange={(event) =>
+                    handleRootChange(stringNo, Number(event.target.value))
+                  }
+                >
+                  {pitchNames.map((pitch, idx) => (
+                    <option key={`${stringNo}_${pitch}`} value={idx}>
+                      {`${pitch}`}
+                    </option>
+                  ))}
+                </select>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <div className={`${styles.fret__map__outer} ${isIntervalMode ? styles.fret__map__interval : ""}`}>
         {modeName}
         <div
           ref={fretMapWrapRef}
@@ -642,123 +618,166 @@ export function IntervalTool({
         </div>
       </div>
 
-      {isIntervalMode ? (
-        <>
-          <div className={styles.selects__ttl}>
-            <h2>Interval</h2>
-          </div>
-          <div className={styles.select__pitch}>
-            {intervalToggleNames.map((name) => {
-              const active = !hiddenIntervalSet.has(name);
-              return (
-                <button
-                  key={name}
-                  type="button"
-                  className={`${styles.pitch__btn} ${active ? styles.js__pitch__active : ""}`}
-                  onClick={() => handleIntervalToggle(name)}
-                >
-                  {name}
-                </button>
-              );
-            })}
-            <button
-              type="button"
-              className={styles.pitch__btn}
-              onClick={handleIntervalHideAll}
-            >
-              HideAll
-            </button>
-            <button
-              type="button"
-              className={styles.pitch__btn}
-              onClick={handleIntervalReset}
-            >
-              Reset
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className={styles.selects__ttl}>
-            <h2>Pitch</h2>
-          </div>
-          <div className={styles.select__pitch}>
-            {pitchNames.map((pitch) => {
-              const isDisabledByScale = disabledPitchSetByScale.has(pitch);
-              const active = !isDisabledByScale && !hiddenPitchSet.has(pitch);
-              return (
-                <button
-                  key={pitch}
-                  type="button"
-                  className={`${styles.pitch__btn} ${active ? styles.js__pitch__active : ""} ${isDisabledByScale ? styles.is__pitch__disabled : ""}`}
-                  disabled={isDisabledByScale}
-                  onClick={() => handlePitchToggle(pitch)}
-                >
-                  {pitch}
-                </button>
-              );
-            })}
-            <button
-              type="button"
-              className={styles.pitch__btn}
-              onClick={handleHideAll}
-            >
-              HideAll
-            </button>
-            <button
-              type="button"
-              className={styles.pitch__btn}
-              onClick={handleResetPitch}
-            >
-              Reset
-            </button>
-          </div>
-        </>
-      )}
-
-      <div
-        className={`${styles.selects__ttl} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        <h2>Scale</h2>
-      </div>
-      <div
-        className={`${styles.scale__selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}
-      >
-        {scaleGroups.map((group) => (
-          <div
-            key={group.root}
-            className={`${styles.scale__selector} ${selectedScale && group.items.includes(selectedScale) ? styles.js__scale__active : ""}`}
+      <AnimatePresence mode="wait">
+        {isIntervalMode ? (
+          <motion.div
+            key="interval-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
           >
-            <select
-              className={styles.scale__btn}
-              value={
-                selectedScale && group.items.includes(selectedScale)
-                  ? selectedScale
-                  : ""
-              }
-              disabled={isIntervalMode}
-              onChange={(event) => handleScaleChange(event.target.value)}
-            >
-              <option value="">{group.root}</option>
-              {group.items.map((scaleName) => (
-                <option key={scaleName} value={scaleName}>
-                  {scaleName}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
+            <div className={styles.selector__wrap}>
+              <div className={styles.selector__ttl}>
+                <h2>Interval</h2>
+              </div>
+              <div className={`${styles.selector__multiButtons} ${styles.selector__interval}`}>
+                {intervalToggleNames.map((name) => {
+                  const active = !hiddenIntervalSet.has(name);
+                  return (
+                    <button
+                      key={name}
+                      type="button"
+                      className={`${styles.pitch__btn} ${active ? styles.js__pitch__active : ""}`}
+                      onClick={() => handleIntervalToggle(name)}
+                    >
+                      {name}
+                    </button>
+                  );
+                })}
+                <button
+                  type="button"
+                  className={`${styles.pitch__btn} ${styles.btn__hide}`}
+                  onClick={handleIntervalHideAll}
+                >
+                  Hide
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.pitch__btn} ${styles.btn__reset}`}
+                  onClick={handleIntervalReset}
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="pitch-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <div className={styles.selector__wrap}>
+              <div className={styles.selector__ttl}>
+                <h2>Pitch</h2>
+              </div>
+              <div className={`${styles.selector__multiButtons} ${styles.selector__pitch}`}>
+                {pitchNames.map((pitch) => {
+                  const isDisabledByScale = disabledPitchSetByScale.has(pitch);
+                  const active = !isDisabledByScale && !hiddenPitchSet.has(pitch);
+                  return (
+                    <button
+                      key={pitch}
+                      type="button"
+                      className={`${styles.pitch__btn} ${active ? styles.js__pitch__active : ""} ${isDisabledByScale ? styles.is__pitch__disabled : ""}`}
+                      disabled={isDisabledByScale}
+                      onClick={() => handlePitchToggle(pitch)}
+                    >
+                      {pitch}
+                    </button>
+                  );
+                })}
+                <button
+                  type="button"
+                  className={`${styles.pitch__btn} ${styles.btn__hide}`}
+                  onClick={handleHideAll}
+                >
+                  Hide
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.pitch__btn} ${styles.btn__reset}`}
+                  onClick={handleResetPitch}
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        <button
-          type="button"
-          className={styles.scale__btn}
-          disabled={isIntervalMode}
-          onClick={handleResetScale}
+      <div className={`${styles.selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}>
+        <div className={styles.selector__ttl}>
+          <h2>Scale</h2>
+        </div>
+        <div
+          className={styles.scale__selector__wrap}
         >
-          Reset
-        </button>
+          {scaleGroups.map((group) => (
+            <div
+              key={group.root}
+              className={`${styles.scale__selector} ${selectedScale && group.items.includes(selectedScale) ? styles.js__scale__active : ""}`}
+            >
+              <select
+                className={styles.scale__btn}
+                value={
+                  selectedScale && group.items.includes(selectedScale)
+                    ? selectedScale
+                    : ""
+                }
+                disabled={isIntervalMode}
+                onChange={(event) => handleScaleChange(event.target.value)}
+              >
+                <option value="">{group.root}</option>
+                {group.items.map((scaleName) => (
+                  <option key={scaleName} value={scaleName}>
+                    {scaleName}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            className={`${styles.scale__btn} ${styles.btn__reset}`}
+            disabled={isIntervalMode}
+            onClick={handleResetScale}
+          >
+            Reset
+          </button>
+        </div>
       </div>
+      
+      <div className={`${styles.selector__wrap} ${isIntervalMode ? styles.section__disabled : ""}`}>
+        <div
+          className={styles.selector__ttl}
+        >
+          <h2>Tuning Preset</h2>
+        </div>
+        <div
+          className={`${styles.selector__multiButtons} ${styles.select__preset}`}
+        >
+          {presetNames.map((tuningName) => (
+            <button
+              key={tuningName}
+              type="button"
+              className={`${styles.select__btn} ${styles.preset__btn}`}
+              disabled={isIntervalMode}
+              onClick={() => handleTuningClick(tuningName)}
+            >
+              {tuningName}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <IntervalUsage />
+
     </div>
   );
 }
