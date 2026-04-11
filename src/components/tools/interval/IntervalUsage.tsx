@@ -56,7 +56,7 @@ export default function IntervalUsage() {
         <AccordionWithAnim defaultOpen={false} summary='◯ リリースノート'>
           <dl className='acc__with__anim__dl'>
             <dt className='acc__with__anim__dt'>2026-04-11</dt>
-            <dd className='acc__with__anim__dd'><span>・</span>弦数変更機能を追加しました</dd>
+            <dd className='acc__with__anim__dd'><span>・</span>弦数変更機能を追加しました<br /><span>・</span>レイアウト全体を調整、ついでにソースも全体をリファクタリングしました</dd>
           </dl>
           <dl className='acc__with__anim__dl'>
             <dt className='acc__with__anim__dt'>2026-04-09</dt>
