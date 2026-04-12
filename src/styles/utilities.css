@@ -93,6 +93,7 @@ main {
     --opacity: 0.85;
 
     position: sticky;
+    container-type: inline-size;
   }
 }
 
@@ -110,8 +111,9 @@ main {
 .global__nav__pc {
   display: flex;
   flex-flow: row nowrap;
-  column-gap: 2.5rem;
+  column-gap: min(3.8cqi, 2.5rem);
   inline-size: 100%;
+  /* font-size: min(1rem, 1.8cqi); */
   font-weight: bold;
 }
 

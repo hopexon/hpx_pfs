@@ -12,6 +12,53 @@ import styles from '../tips.module.css'
   ))}
 </section>
 
+<br />
+
+```html
+<details name='accordion'>
+  <summary>Accordion with interpolate</summary>
+  <p>hoge</p>
+</details>
+```
+```css
+:root {
+  interpolate-size: allow-keywords
+}
+
+details::details-content {
+  overflow: clip;
+  transition-property: content-visibility, block-size;
+  transition-behavior: allow-discrete; // not on :root
+}
+
+details:not([open])::details-content {
+  block-size: 0;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+```
+
+<br />
+
+`::details-content`、`interpolate-size: allow-keywords`、`transition-behavior: allow-discrete`の3キーワードを軸にCSSのみでアニメーション付きアコーディオンを実装する方法。  
+iOS18.4より`details-content`内の`summary`以外のコンテンツを一括指定する疑似要素`::details-content`が使用可能となった。  
+またChromium129よりプログレッシブエンハンスメントとして「相対値に対してアニメーション、トランジションを可能とする」プロパティ`interpolate-size: allow-keywords`が使用可能となった。  
+この2点を加えることで、従来にアニメーション用`div`を必要としない(構造的汚染を持たない)アコーディオンアニメーションが可能となる。  
+非展開時の`::details-content`に`block-size: 0`をすることで展開時の`block-size: auto`に対し`interpolte-size`および`transition-behavior / property`で許可したアニメーションが実行される。  
+::details-content に対しては`overflow: clip`を指定しないとアコーディオンを開いた瞬間コンテンツ全体がアコーディオンを突き抜けてしまうので注意。
+
+<br />
+
+注意点として`interpolate-size`プロパティは iOS26 時点でも未対応のため、現状Chromium限定のプログレッシブ・エンハンスメントとなり2026年時点では実用的ではない。
+
+<br />
+
+また iOS18.4 から対応となる`::etails-content`についても実務で使用可能かギリギリの範囲のため、現状 details-content に対し padding 等レイアウト関連のプロパティを追加すべきではない。
+
+
 <section className={styles.section__accordion__with__grid}>
   {Array.from({ length: 3 }).map((_, i) => (
     <div key={i}>
@@ -26,3 +73,23 @@ import styles from '../tips.module.css'
     </div>
   ))}
 </section>
+
+<br />
+
+```html
+<details name='accordion'>
+  <summary>Accordion with grid</summary>
+  <div class='for__animation'>
+    <div class='content__wrapper'>
+      <p>hoge</p>
+    </div>
+  </div>
+</details>
+```
+```css
+.for__animation {
+  overflow: hidden;
+}
+
+
+```

@@ -1,3 +1,9 @@
+.tips__section__wrapper p {
+  padding: 1rem;
+  line-height: 1.6;
+  background-color: var(--base-100);
+}
+
 .tips__hg,
 .tips__section__wrapper {
   --gutter-inline: calc((1520 - (var(--inline-content-size-val))) * 1px / 4);
@@ -212,7 +218,7 @@
 }
 
 .section__accordion__with__grid {
-  margin-block-start: 6rem;
+  margin-block-start: 10rem;
   .for__animation {
     overflow: hidden;
   }

@@ -5,7 +5,7 @@ export const tipsList = [
     url: 'text_indent_hanging',
   },
   {
-    title: '2025年ナウすぎるアコーディオン、ほどほどのアコーディオン',
+    title: '2026_accordion',
     date: '2025.08.27',
     url: 'accordion_2025',
   },
