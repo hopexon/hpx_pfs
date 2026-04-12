@@ -1,0 +1,37 @@
+import Link from 'next/link'
+import styles from '../tips.module.css'
+
+従来`padding-left`と`text-indent`を組み合わせたり`grid`や`flex`を用いて実装されていた2行目以降のインデントについて、`hanging`キーワードが全主要ブラウザで対応となった。  
+`hanging`の指定により「2行目以降が指定サイズでインデント」となる。
+
+<br />
+
+◯参照  
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent#hanging" target="_blank" rel="noopener noreferrer">- MDN Web Docs - text-indent: hanging</a >
+
+
+```css
+.indent__past {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.indent__past__grid {
+  display: grid;
+  grid-template-columns:auto 1fr;
+}
+
+// text-indent: hanging を使用したぶら下げインデント
+.indent__hanging {
+  text-indent: 1em hanging;
+}
+```
+
+<br />
+
+<p className={styles.indent__past}>・indent_with_padding<br />indent_with_padding<br />indent_with_padding</p>
+
+<br />
+
+<p className={styles.indent__hanging}>・indent_with_hanging<br />indent_with_hanging<br />indent_with_hanging</p>
+

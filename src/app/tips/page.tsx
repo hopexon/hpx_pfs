@@ -1,35 +1,27 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-
-const pageTitle = "TOP"
+import type {  Metadata } from 'next'
+import Link from 'next/link'
+import { tipsList } from './data.js'
 
 export const metadata: Metadata = {
-  title: `${pageTitle} | Hopexon Portfolio`,
-  description: `${pageTitle} page of Hopexon Portfolio`,
-};
+  title: 'Tips',
+  description: 'Tips page',
+}
 
-const topMenuList = [
-  { name: "Tools", path: "/tools" },
-  { name: "Music Review", path: "https://hpx-pfproject02.vercel.app/music-review/" },
-  { name: "Works", path: "/works" },
-  { name: "Collections", path: "/collections" },
-]
-
-export default function Home() {
+export default function Tips() {
   return (
     <div>
-      <h1 className='page__ttl'>{pageTitle}</h1>
+      <h1 className='page__ttl'>{String(metadata.title || "")}</h1>
       <div className="main__wrap">
         <section className="section__wrapper">
           <div className="linkitem__wrap space-y-10">
-            {topMenuList.map((item) => (
-              <Link key={item.name} href={item.path} className="link__twister w-fit font-bold">
-                {item.name}
+            {tipsList.map((tip) => (
+              <Link href={`/tips/${tip.url}`} key={tip.url} className="link__twister w-fit bold">
+                {tip.title}
               </Link>
             ))}
           </div>
         </section>
       </div>
     </div>
-  );
+  )
 }

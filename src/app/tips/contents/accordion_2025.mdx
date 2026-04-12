@@ -1,0 +1,28 @@
+import Link from 'next/link'
+import styles from '../tips.module.css'
+
+<section className={styles.section__accordion__with__interpolate}>
+  {Array.from({ length: 3 }).map((_, i) => (
+    <div key={i}>
+      <details name='accordion'>
+        <summary >Accordion with interpolate</summary>
+        <p>Lorem ipsum dolor sit amet. Ut officiis velit hic quaerat architecto ex vero deleniti eos voluptate dolore sed sequi quibusdam. Non incidunt beatae non magnam internos et magnam perferendis quo quos esse et fugiat recusandae. Ut quis quibusdam et possimus aspernatur et velit eveniet qui pariatur itaque aut veritatis sequi et quidem eaque. Ut pariatur iure a eaque totam ut ipsam consectetur qui cupiditate voluptas sed exercitationem voluptas aut iusto molestias et cumque voluptatum.Hic magni officia in atque quia et fuga sint aut molestiae facilis eum labore ipsa qui temporibus sint. Ad labore eaque est rerum totam non debitis doloremque sed quia harum et laboriosam omnis qui omnis debitis!Sed illo sint et pariatur dolores quo atque eius aut maiores exercitationem. 33 optio quibusdam eum consequatur dolorem ut adipisci iste! Nam voluptatem aliquam et possimus commodi qui molestiae fugit id laboriosam quia et rerum nostrum aut architecto enim.</p>
+      </details>
+    </div>
+  ))}
+</section>
+
+<section className={styles.section__accordion__with__grid}>
+  {Array.from({ length: 3 }).map((_, i) => (
+    <div key={i}>
+      <details name='accordion__with__grid'>
+        <summary>Accordion with grid</summary>
+        <div className={styles.for__animation}>
+          <div className={styles.accordion__contents__wrapper}>
+            <p>Lorem ipsum dolor sit amet. Ut officiis velit hic quaerat architecto ex vero deleniti eos voluptate dolore sed sequi quibusdam. Non incidunt beatae non magnam internos et magnam perferendis quo quos esse et fugiat recusandae. Ut quis quibusdam et possimus aspernatur et velit eveniet qui pariatur itaque aut veritatis sequi et quidem eaque. Ut pariatur iure a eaque totam ut ipsam consectetur qui cupiditate voluptas sed exercitationem voluptas aut iusto molestias et cumque voluptatum.Hic magni officia in atque quia et fuga sint aut molestiae facilis eum labore ipsa qui temporibus sint. Ad labore eaque est rerum totam non debitis doloremque sed quia harum et laboriosam omnis qui omnis debitis!Sed illo sint et pariatur dolores quo atque eius aut maiores exercitationem. 33 optio quibusdam eum consequatur dolorem ut adipisci iste! Nam voluptatem aliquam et possimus commodi qui molestiae fugit id laboriosam quia et rerum nostrum aut architecto enim.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  ))}
+</section>

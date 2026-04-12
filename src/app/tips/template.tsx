@@ -4,7 +4,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import React from 'react'
-import { AmoebaAnimation } from "../components/common/AmoebaAnimation"
+import { AmoebaAnimation } from "@/components/common/AmoebaAnimation"
 
 const variants = {
   hidden: { opacity: 0 },

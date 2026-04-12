@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 const topMenuList = [
   { name: "Tools", path: "/tools" },
+  { name: "Tips", path: "/tips" },
   { name: "Music Review", path: "https://hpx-pfproject02.vercel.app/music-review/" },
   { name: "Works", path: "/works" },
   { name: "Collections", path: "/collections" },

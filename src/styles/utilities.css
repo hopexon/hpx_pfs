@@ -634,7 +634,7 @@ main {
   font-display: swap;
 }
 
-/* 共通背景 */
+/* Amoeba background */
 .fixed__background {
   position: fixed;
   inset: 0;
@@ -643,11 +643,11 @@ main {
   pointer-events: none;
 }
 
-.site__wrapper {
+/* .site__wrapper {
   position: relative;
   background: transparent;
   z-index: 1;
-}
+} */
 
 .main-circle {
 --color: var(--base-100);
