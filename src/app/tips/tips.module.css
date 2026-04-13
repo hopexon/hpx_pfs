@@ -1,7 +1,12 @@
-.tips__section__wrapper p {
+.tips__base__txt {
   padding: 1rem;
   line-height: 1.6;
   background-color: var(--base-100);
+}
+
+.tips__base__txt code {
+  background-color: var(--base-200);
+  padding-inline: 0.2em;
 }
 
 .tips__hg,
@@ -163,95 +168,7 @@
   justify-content: flex-end;
 }
 
-.tips__section__wrapper p code {
-  background-color: var(--base-200);
-  padding-inline: 0.2em;
-}
-
 
 /* -----------------------------------
 サンプル用
 ----------------------------------- */
-.indent__past {
-  padding-left: 1em;
-  text-indent: -1em;
-}
-
-.indent__hanging {
-  text-indent: 1em hanging;
-}
-
-.section__accordion__with__interpolate {
-  interpolate-size: allow-keywords;
-
-  details {
-    container-type: inline-size;
-    border: 1px solid var(--red-200);
-
-    p {
-      padding: 2cqi;
-    }
-  }
-
-  details::details-content {
-    overflow: clip;
-    transition-duration: 300ms;
-    transition-property: content-visibility, block-size;
-    transition-behavior: allow-discrete;
-  }
-
-  details:not([open])::details-content {
-    block-size: 0;
-  }
-
-  summary {
-    display: grid;
-    padding-block: 2cqi;
-    padding-inline: 2cqi;
-    background-color: var(--red-400);
-    color: #fff;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-}
-
-.section__accordion__with__grid {
-  margin-block-start: 10rem;
-  .for__animation {
-    overflow: hidden;
-  }
-
-  details {
-    container-type: inline-size;
-    border: 1px solid var(--blue-200);
-  }
-
-  details::details-content {
-    content-visibility: unset;
-    display: block grid;
-    transition-duration: 300ms;
-    transition-property: grid-template-rows;
-  }
-
-  details:not([open])::details-content {
-    grid-template-rows: 0fr;
-  }
-
-  details[open]::details-content {
-    grid-template-rows: 1fr;
-  }
-
-  summary {
-    display: grid;
-    padding-block: 2cqi;
-    padding-inline: 2cqi;
-    background-color: var(--blue-400);
-    color: #fff;
-  }
-
-  .accordion__contents__wrapper {
-    padding: 2cqi;
-  }
-}
