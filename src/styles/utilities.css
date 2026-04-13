@@ -598,44 +598,6 @@ main {
   }
 }
 
-
-/* Fonts */
-@font-face {
-  font-family: 'monsterrat';
-  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'monsterrat';
-  src: url('/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'sawarabi-gothic';
-  src: url('/fonts/SawarabiGothic-Regular.ttf') format('truetype');
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'zenkaku-gothic';
-  src: url('/fonts/SawarabiMincho-Regular.ttf') format('truetype');
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'zenkaku-gothic-new';
-  src: url('/fonts/ZenKakuGothicNew-Regular.ttf') format('truetype');
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Amoeba background */
 .fixed__background {
   position: fixed;
@@ -644,12 +606,6 @@ main {
   background: linear-gradient(0deg, var(--paper) 0%, #eae7dc 100%);
   pointer-events: none;
 }
-
-/* .site__wrapper {
-  position: relative;
-  background: transparent;
-  z-index: 1;
-} */
 
 .main-circle {
 --color: var(--base-100);
@@ -714,4 +670,48 @@ main {
 @keyframes wobble {
   0% { border-radius: 50% 50% 50% 50%; }
   100% { border-radius: 40% 60% 55% 45%; transform: translate(-52%, -48%) scale(1.05); }
+}
+
+/* Fonts */
+@font-face {
+  font-family: 'monsterrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'monsterrat';
+  src: url('/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sawarabi-gothic';
+  src: url('/fonts/SawarabiGothic-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'zenkaku-gothic';
+  src: url('/fonts/SawarabiMincho-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'zenkaku-gothic-new';
+  src: url('/fonts/ZenKakuGothicNew-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  src: url('/fonts/NotoSansJP-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
 }

@@ -1,5 +1,10 @@
 export const tipsList = [
   {
+    title: 'most_stable_font_settings_2025',
+    date: '2026.04.13',
+    url: 'most_stable_font_settings_2025',
+  },
+  {
     title: 'text-indent: hanging でぶら下げインデントを実装する',
     date: '2026.04.11',
     url: 'text_indent_hanging',

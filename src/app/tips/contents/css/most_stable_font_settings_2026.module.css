@@ -1,0 +1,60 @@
+.fontsettings__text {
+  padding: 0.5rem;
+  border: 1px solid var(--base-300);
+  border-radius: 1rem;
+}
+
+.fontsettings__btn__wrap {
+  display: grid;
+  grid-template-columns: repeat(3, calc((200 / 16) * 1rem));
+  column-gap: 0.5rem;
+  justify-content: center;
+  margin-block-start: 1rem;
+
+  button {
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--base-300);
+    border-radius: 4px;
+    background-color: var(--base-100);
+    cursor: pointer;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        opacity: 0.6;
+        transition: opacity 0.2s ease-in-out;
+      }
+    }
+  }
+}
+
+.fontsettings__1 {
+  font-family: 
+    "Noto Sans JP",
+    "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    "BIZ UDPGothic",
+    sans-serif;
+}
+
+.fontsettings__2 {
+  font-family: 
+    "Helvetica Neue",
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Arial,
+    Meiryo,
+    "Noto Sans JP",
+    "BIZ UDPGothic",
+    sans-serif;
+}
+
+.fontsettings__3 {
+  font-family: 
+    sans-serif;
+}
