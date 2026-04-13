@@ -12,9 +12,12 @@
 
   details::details-content {
     overflow: clip;
-    transition-duration: 300ms;
-    transition-property: content-visibility, block-size;
-    transition-behavior: allow-discrete;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition-duration: 300ms;
+      transition-property: content-visibility, block-size;
+      transition-behavior: allow-discrete;
+    }
   }
 
   details:not([open])::details-content {
@@ -48,8 +51,11 @@
   details::details-content {
     content-visibility: unset;
     display: block grid;
-    transition-duration: 300ms;
-    transition-property: grid-template-rows;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition-duration: 300ms;
+      transition-property: grid-template-rows;
+    }
   }
 
   details:not([open])::details-content {
