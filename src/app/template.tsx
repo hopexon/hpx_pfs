@@ -16,7 +16,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <>
       <div className="fixed__background" />
       <motion.div
-        className='site__wrapper'
+        className='site-wrapper'
         variants={variants}
         initial='hidden'
         animate='enter'
