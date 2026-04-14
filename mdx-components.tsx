@@ -4,7 +4,7 @@ import styles from '@/app/tips/tips.module.css'
 
 const components: MDXComponents = {
   pre: CodeBlock,
-  p: ({ children }) => <p className={styles.tips__base__txt}>{children}</p>
+  p: ({ children, className }) => <p className={[styles.tips__base__txt, className].filter(Boolean).join(' ')}>{children}</p>
 }
 
 export function useMDXComponents(): MDXComponents {

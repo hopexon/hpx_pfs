@@ -1,7 +1,17 @@
 /* Base */
 body {
   background-color: var(--paper);
-  font-family: "monsterrat", "zenkaku-gothic-new", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "Noto Sans JP", "BIZ UDPGothic", sans-serif;
+  font-family: 
+    "monsterrat",
+    "zenkaku-gothic-new",
+    "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    "Meiryo",
+    "Noto Sans JP",
+    "BIZ UDPGothic",
+    sans-serif;
 }
 
 main {
@@ -14,7 +24,7 @@ main {
 .page__ttl {
   --padding-inline: 2rem;
   --margin-block-start: 5rem;
-  --font-size: 1.5rem;
+  --font-size: calc((24/16) * 1rem);
   --text-align: center;
 
   padding-inline: var(--padding-inline);
@@ -25,7 +35,7 @@ main {
   font-weight: bold;
   text-align: var(--text-align);
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     --padding-inline: var(--gutter-inline);
     --margin-block-start: 3rem;
     --text-align: left;
@@ -47,7 +57,7 @@ main {
   inline-size: 100%;
   max-inline-size: var(--inline-content-size);
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     --padding-block: 5rem;
     --padding-inline: var(--gutter-inline);
   }
@@ -77,7 +87,9 @@ main {
   color: var(--blue-50);
   border-top-left-radius: var(--border-bottom-left-radius);
   border-bottom-left-radius: var(--border-bottom-left-radius);
-  transition: transform var(--transition-duration) ease-out, opacity var(--transition-duration) ease-out;
+  transition: transform, opacity;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: ease-out;
   opacity: var(--opacity);
   z-index: 1000;
 
@@ -101,7 +113,9 @@ main {
   --opacity: 0;
 
   transform: translateY(-100%);
-  transition: transform var(--transition-duration) ease-out, opacity var(--transition-duration) ease-out;
+  transition: transform, opacity;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: ease-out;
 
   @media screen and (min-width: 768px) {
     --opacity: 0.85;
@@ -113,7 +127,6 @@ main {
   flex-flow: row nowrap;
   column-gap: min(3.8cqi, 2.5rem);
   inline-size: 100%;
-  /* font-size: min(1rem, 1.8cqi); */
   font-weight: bold;
 }
 
@@ -156,7 +169,7 @@ main {
   row-gap: 2rem;
   padding: 2rem 2rem 2rem 1.5rem;
   min-inline-size: calc(100vw - 30vw);
-  font-weight: bold;
+  font-weight: 700;
   background-color: var(--paper);
 }
 
@@ -230,20 +243,16 @@ main {
 
 /* Accordion with__anim */
 .acc__with__anim {
-  /* --padding: 1.5rem 1rem; */
   --padding: 0;
 
   padding: var(--padding);
-  /* margin-block-start: 10rem; */
   inline-size: 100%;
   block-size: fit-content;
   background-color: rgba(195, 192, 180, 0.2);
   border: 1px solid var(--base-300);
   border-radius: 0.5rem;
 
-  @media (min-width: 768px) {
-    /* --padding: 1.5rem 2rem; */
-
+  @media screen and (min-width: 768px) {
     margin-inline: auto;
   }
 
@@ -251,7 +260,7 @@ main {
     &::details-content {
       --padding-inline: 1rem;
 
-      display: block grid;
+      display: grid;
       padding-inline: var(--padding-inline);
       content-visibility: unset;
 
@@ -261,7 +270,7 @@ main {
       }
     }
 
-    @media (min-width: 768px) {
+    @media screen and (min-width: 768px) {
       &::details-content {
         --padding-inline: 2rem;
       }
@@ -296,7 +305,7 @@ main {
       }
     }
 
-    @media (min-width: 768px) {
+    @media screen and (min-width: 768px) {
       summary {
         --padding: 1.5rem 2rem;
       }
@@ -335,143 +344,6 @@ main {
   overflow: hidden;
 }
 
-/* Contents */
-.container__item {
-  padding: 1cqi;
-  inline-size: fit-content;
-  border: 1px solid #000;
-}
-
-.hl {
-  padding-inline: 0.3cqi;
-  margin-inline: 0.1cqi;
-  background-color: var(--yellow-200);
-  font-weight: bolder;
-  color: var(--base-700);
-}
-
-.snippets__wrap {
-  display: grid;
-  grid-template-areas: "css" "html" "commentary" "refs";
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto auto;
-  padding-block-start: 3rem;
-  inline-size: 100%;
-
-  @media (min-width: 768px) {
-    grid-template-areas: "css html" "commentary commentary" "refs refs";
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-}
-
-.snippets__wrap + .snippets__wrap {
-  margin-block-start: 2rem;
-}
-
-.property__wrap {
-  border-bottom: 1px solid #fff;
-}
-
-.property__wrap:last-child {
-  border-bottom: none;
-}
-
-.commentary,
-.css,
-.html,
-.refs {
-  font-size: clamp(14px, 1.5cqi, 16px);
-  font-weight: normal;
-  overflow: auto auto;
-}
-
-.css,
-.html,
-.commentary {
-  color: var(--base-50);
-}
-
-.css {
-  grid-area: css;
-  background-color: var(--cyan-900);
-}
-
-.html {
-  grid-area: html;
-  background-color: var(--blue-900);
-}
-
-.commentary {
-  padding: 10cqi 5cqi 0;
-  grid-area: commentary;
-  background-color: var(--base-700);
-  color: #fff;
-
-  @media (min-width: 768px) {
-    padding: 5cqi 2cqi 0;
-  }
-}
-
-.refs {
-  padding: 4cqi;
-  grid-area: refs;
-  background-color: var(--green-50);
-
-  @media (min-width: 768px) {
-    padding: 2cqi;
-  }
-}
-
-.refs p {
-  font-weight: bold;
-}
-
-.refs a {
-  font-style: italic;
-}
-
-.refs li {
-  margin-block-start: 1.5cqi;
-  width: fit-content;
-}
-
-.availability {
-  font-style: italic;
-  color: var(--base-200);
-  text-decoration: underline;
-}
-
-.link-ref {
-  padding-inline: 0.3cqi;
-  transition: all 0.15s ease-in-out;
-  background-color: inherit;
-
-  @media (any-hover: hover) {
-    &:hover {
-      color: #fff;
-      transition: all 0.15s ease-in-out;
-      background-color: var(--red-400);
-    }
-  }
-}
-
-.link-mdn {
-  opacity: 1;
-  margin-inline-start: 0.5cqi;
-  color: var(--red-400);
-  font-style: italic;
-  transition: all 0.15s ease-in-out;
-  display: none;
-
-  @media (min-width: 768px) {
-    display: inline;
-  }
-}
-
-.inCommentary__code {
-  background-color: var(--blue-400);
-  overflow: auto auto;
-}
 
 .item__hover {
   opacity: 1;
@@ -486,20 +358,6 @@ main {
 }
 
 /* Utility */
-.hov__blur {
-  transition-property: filter;
-  transition-duration: 200ms;
-
-  @media (any-hover: hover) {
-    &:hover {
-      --blur-size: 0.3cqi;
-      filter: blur(var(--blur-size));
-      transition-property: filter;
-      transition-duration: 200ms;
-    }
-  }
-}
-
 .link__twister {
   position: relative;
   display: grid;
@@ -585,7 +443,7 @@ main {
 .sp__only {
   display: block;
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     display: none;
   }
 }
@@ -593,7 +451,7 @@ main {
 .pc__only {
   display: none;
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     display: block;
   }
 }
