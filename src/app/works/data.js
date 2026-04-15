@@ -73,10 +73,37 @@ export const works = [
   },
   {
     title: 'On and On',
+    date: '2026.05.23',
+    venue: 'Numm Aoyama (Tokyo)',
+    imgBaseName: 'onandon_260523',
+    alt: 'On And On 20260523',
+    width: '1000',
+    height: '1409'
+  },
+  {
+    title: '',
+    date: '',
+    venue: '',
+    imgBaseName: 'onandon_260523_2',
+    alt: 'On And On 20260523_2',
+    width: '1000',
+    height: '1409'
+  },
+  {
+    title: 'On and On',
     date: '2026.03.21',
     venue: 'Numm Aoyama (Tokyo)',
     imgBaseName: 'onandon_260321',
     alt: 'On And On 20260321',
+    width: '1000',
+    height: '1409'
+  },
+  {
+    title: '',
+    date: '',
+    venue: '',
+    imgBaseName: 'onandon_260321_2',
+    alt: 'On And On 20260321_2',
     width: '1000',
     height: '1409'
   },
