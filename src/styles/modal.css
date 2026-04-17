@@ -4,18 +4,17 @@
 }
 
 dialog {
-  /* Safariで表示に不具合が出るので明示する必要がある */
-  position: fixed; 
-  /* 中央寄せのための設定 */
-  top: 50%;
-  left: 50%;
+  position: fixed; /* Safariで表示に不具合が出るので明示する必要がある */
+  /* 中央寄せ */
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
   /* inset: 0 を削除して、幅・高さを明示的に設定 */
-  width: min(90vw, 600px); /* 最大幅を設定 */
-  max-height: 40vh;
+  inline-size: min(90vw, calc((600/16) * 1rem)); /* 最大幅を設定 */
+  max-block-size: 40vh;
   margin: 0; /* ブラウザデフォルトのmarginをリセット */
   overscroll-behavior-block: contain;
-  transition-duration: 300ms;
+  transition-duration: 0.3s;
   transition-property: display, overlay, opacity, transform;
   transition-timing-function: ease-out;
   transition-behavior: allow-discrete;

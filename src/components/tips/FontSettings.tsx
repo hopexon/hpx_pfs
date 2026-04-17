@@ -8,7 +8,7 @@ export default function FontSettings() {
 
   return (
     <>
-      <p className='[text-align:center] [font-weight:700]'>choose font family</p>
+      <p className='text-center font-bold'>choose font family</p>
 
       <section className={styles.fontsettings__btn__wrap}>
         <button onClick={() => setFontSettingClass(styles.fontsettings__1)}>Noto Sans JP </button>
