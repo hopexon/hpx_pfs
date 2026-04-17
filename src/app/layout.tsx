@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     template: "%s | Hopexon Portfolio",
   },
   description: "A static portfolio generated with Next.js",
+  openGraph: {
+    siteName: "Hopexon Portfolio",
+    description: "A static portfolio generated with Next.js",
+    locale: "ja_JP",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://hpx-pfproject01.vercel.app/",
+  }
 }
 
 export default function RootLayout({
