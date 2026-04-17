@@ -35,7 +35,7 @@ export default function ModalWithCommandAttr() {
             id={`dialog__${num}`}
             aria-labelledby={`dialog__${num}-heading`}
             closedby='any'
-            autofocus
+            autoFocus
           >
             <div className={styles.dialog__inner}>
               <h1 id={`dialog__${num}-heading`}>Modal Title {num}</h1>
@@ -57,7 +57,7 @@ export default function ModalWithCommandAttr() {
           id={`dialog__3`}
           aria-labelledby={`dialog__3-heading`}
           closedby='any'
-          autofocus
+          autoFocus
         >
           <div className={styles.dialog__inner}>
             <h1 id={`dialog__3-heading`}>Modal Title 3</h1>

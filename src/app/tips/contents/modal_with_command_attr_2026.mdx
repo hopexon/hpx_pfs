@@ -1,3 +1,291 @@
 import ModalWithCommandAttr from '@/components/tips/Modalwithcommandattr'
+import CustomCommandAttr from '@/components/tips/CustomCommandAttr'
+import styles from '../tips.module.css'
 
 <ModalWithCommandAttr />
+
+<br />
+
+```tsx
+// button
+<section className={styles.modal__with__command__wrap}>
+  <div className={styles.modal__with__command__btn__wrap}>
+    {Array.from({ length: 2 }, (_, i) => i + 1).map((num) => (
+      <button
+        key={num}
+        type='button'
+        commandfor={`dialog__${num}`}
+        command='show-modal'
+      >
+        Open Modal {num}
+      </button>
+    ))}
+    <button
+      key='3'
+      type='button'
+      commandfor='dialog__3'
+      command='show-modal'
+    >
+      Open Modal 3
+    </button>
+  </div>
+</section>
+
+// modal
+{Array.from({ length: 2 }, (_, i) => i + 1).map((num) => (
+  <div key={num} className={styles.dialog__wrap}>
+    <dialog
+      key={num}
+      id={`dialog__${num}`}
+      aria-labelledby={`dialog__${num}-heading`}
+      closedby='any'
+      autoFocus
+    >
+      <div className={styles.dialog__inner}>
+        <h1 id={`dialog__${num}-heading`}>Modal Title {num}</h1>
+        <p>Modal Content</p>
+        <button
+          type='button'
+          commandfor={`dialog__${num}`}
+          command='close'
+          className={styles.close__btn}
+        >
+          Close Modal
+        </button>
+      </div>
+    </dialog>
+  </div>
+))}
+```
+```css
+:root:has(:modal) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+dialog {
+  position: fixed; /* Safariで表示に不具合が出るので明示する必要がある */
+  /* 中央寄せ */
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  /* inset: 0 を削除して、幅・高さを明示的に設定 */
+  inline-size: min(90vw, calc((600/16) * 1rem)); /* 最大幅を設定 */
+  max-block-size: 40vh;
+  margin: 0; /* ブラウザデフォルトのmarginをリセット */
+  overscroll-behavior-block: contain;
+  transition-duration: 0.3s;
+  transition-property: display, overlay, opacity, transform;
+  transition-timing-function: ease-out;
+  transition-behavior: allow-discrete;
+  overflow: auto;
+}
+
+dialog::backdrop {
+  background-color: oklch(from var(--black) l c h / 50%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition-duration: inherit;
+  transition-property: opacity;
+  transition-timing-function: inherit;
+}
+
+/* モーダル展開直後の状態を明示的に設定 */
+@starting-style {
+  dialog:modal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  dialog:modal::backdrop {
+    opacity: 0;
+  }
+}
+
+/* モーダル非表示時の状態を明示的に設定 */
+dialog:not(:modal) {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+dialog:not(:modal)::backdrop {
+  opacity: 0;
+}
+```
+
+<br />
+<br />
+<br />
+
+<h2>●概要</h2>
+
+`<button>`要素に対する`command`属性の付与によるJS不要のモーダル実装。  
+一応 Baseline2025 ではあるのだが、command属性は`iOS26.2`からの対応となるためNewlyもNewly、対応したてホヤホヤなので26年時点ではプログレッシブ・エンハンスメントととして実務での使用は避けるべき。
+
+参照：<a href='https://developer.mozilla.org/ja/docs/Web/API/HTMLButtonElement/command' target='_blank'>MDN - command</a>
+
+<br />
+<br />
+
+<h2>●button要素へ付与可能な command 属性一覧</h2>
+
+<span className={styles.tips__hanging}>・`show-modal`：`dialog`をモーダルとして表示させる。JSにおける`.showModal()`と同等。</span>  
+<span className={styles.tips__hanging}>・`close`：モーダルを閉じる。`.close()`と同等。</span>  
+<span className={styles.tips__hanging}>・`show-popover`：ポップオーバーを表示する。`.showPopover()`と同等。</span>  
+<span className={styles.tips__hanging}>・`hide-popover`：ポップオーバーを非表示にする。`.hidePopover()`と同等。</span>  
+<span className={styles.tips__hanging}>・`toggle-popover`：ポップオーバーの表示/非表示を切り替える。`.togglePopover()`と同等。</span>  
+<span className={styles.tips__hanging}>・`request-close`：モーダルの閉鎖をリクエストする。`.requestClose()`と同等。</span>  
+<span className={styles.tips__hanging}>・`カスタム値`：ハイフン2つ`--`をプレフィックスとして用いることでカスタムコマンドを定義可能。</span>
+
+<br />
+<br />
+
+<h2>●dialog要素へ付与可能な closedby 属性一覧</h2>
+
+<span className={styles.tips__hanging}>・`closedby='any'`：閉じるボタン、dialog範囲外、Escキーのいずれでもモーダルを閉じることが可能</span>  
+<span className={styles.tips__hanging}>・`closedby='closerequest'`：閉じるボタン、またはEscキーでモーダルを閉じることが可能</span>  
+<span className={styles.tips__hanging}>・`closedby='none'`：閉じるボタン以外では閉じることが出来ない</span>  
+
+<br />
+<br />
+
+<h2>●commandfor 属性</h2>
+
+`commandfor`属性は`<button>`要素に付与する。  
+`<dialog>要素に付与された id 属性の値`を`commandfor`に入力して紐づける。
+
+<br />
+<br />
+
+<h2>●現状必須なpolyfillライブラリ</h2>
+
+上記2属性に対応していない環境であっても、以下2つのポリフィルを実装することで`無理やり`対応することが可能。  
+ただしポリフィルはセキュリティリスクが付きまとうため、恒常的にメンテナンス出来る環境でなければ採用は見送ったほうがいいと思うんだよね。  
+<span className={styles.tips__keywords__ttl}>・Invoker Buttons Polyfill</span>  
+`command`属性、`commandfor`属性を非対応環境で有効化するライブラリ  
+<span className={styles.tips__keywords__ttl}>・dialog-closedby-polyfill</span>  
+`closedby`属性を非対応環境で有効化するライブラリ  
+
+参照：
+<span className={styles.tips__hanging}>・<a href='https://github.com/keithamus/invokers-polyfill' target='_blank'>Github - invokers-polyfill</a></span>  
+<span className={styles.tips__hanging}>・<a href='https://github.com/tak-dcxi/dialog-closedby-polyfill' target='_blank'>Github - dialog-closedby-polyfill</a></span>
+
+
+<br />
+<br />
+
+<h2>●iOSでのモーダル背景スクロール対策</h2>
+```css
+:root:has(:modal) {
+  overflow: hidden;
+}
+```
+モーダル展開時に`overflow:hidden`とするのは`root`要素がよい。  
+`dialog`要素には`showModal()`だけでなく`show()`メソッドを用いた「非固定的」モーダル(ポップオーバー)も存在するため、従来の`body:has(dialog[open])`は非固定的モーダルの表示時もスクロールを排除してしまう。  
+`has:`の対象を`dialog`ではなく`:modal`とすることにより、`showModal() で開かれた dialog`や`requestFullScreen() で開かれた動画`など「明らかに画面全体を固定する要素」にのみスクロール排除を限定することが出来る。  
+
+`overflow: clip`を用いない理由は単純に`Firefoxでスクロール抑制が機能しないから`である。  
+
+参照：<a href='https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Selectors/:modal' target='_blank'>MDN - https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Selectors/:modal</a>
+
+<br />
+<br />
+
+<h2>●その他キーワード</h2>
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●scrollbar-gutter: <br className='sp__only' /> - <span className={styles.tips__status__available}>Baseline2024 Newly Available</span></span>  
+指定した要素内に予めスクロールバー表示分の余白を用意することで、スクロールバー横幅分のレイアウトシフトを防ぐためのプロパティ。  
+
+注意点として各モダンブラウザで適用するためには`クラシックスクロールバー形式(スクロールバーが実体として幅を持つ表示形式)`をOSまたはブラウザで指定しておく必要がある。  
+例えばMacOSではデフォルトで`オーバーレイスクロールバー(スクロール領域にスクロールバーが重なって表示される)`が設定されている。  
+<span className={styles.tips__hanging}>・`auto`: デフォルト値。特に変化無し</span>  
+<span className={styles.tips__hanging}>・`stable`: 要素右側に常にスクロールバー分の領域を確保する</span>  
+<span className={styles.tips__hanging}>・`stable both-edges`: 要素右にスクロールバーが表示される状態となった場合、要素の左右にスクロールバー分の領域を確保する。左側への偏りが懸念される場合に使用</span>
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●overscroll-behavior-block: <br className='sp__only' /> - <span className={styles.tips__status__available}>Baseline Widely Available</span></span>  
+例えば縦スクロールが発生しているモーダル要素の最下部までスクロールした際に、そのままつられて背景のコンテンツまでスクロールしてしまう、といったスクロールの連鎖を`スクロールチェーン`と呼ぶ。  
+対策としては`:where(body:has(:modal[open])) { overflow: hidden; }`と言った形でモーダル展開時`body`にスクロール抑制を付与する形が常套だったが、この形は iOS と相性が悪いことで知られていた。  
+`overscroll-behavior`はいわば`スクロールチェーンに特化したoverflowプロパティ`であり、これにより従来に比べ非常に易な実装でスクロールチェーンを防止することが可能となった。  
+<span className={styles.tips__hanging}>・`auto`: デフォルト値。特に変化無し</span>  
+<span className={styles.tips__hanging}>・`contain`: スクロール連鎖を防ぐ</span>  
+<span className={styles.tips__hanging}>・`none`: スクロール連鎖の防止に加え、ページ上(下)端到達時のバウンス挙動を防ぐ</span>
+
+参照：  
+<span className={styles.tips__hanging}>・<a href='https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Properties/scrollbar-gutter' target='_blank'>MDN - scrollbar-gutter</a></span>  
+<span className={styles.tips__hanging}>・<a href='https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Properties/overscroll-behavior' target='_blank'>MDN - overscroll-behavior</a></span>  
+<span className={styles.tips__hanging}>・<a href='https://www.tak-dcxi.com/article/modal-implementation-in-2025/' target='_blank'>JavaScriptを書かない2025年のモーダルの実装方法</a></span>  
+<span className={styles.tips__hanging}>・<a href='https://zenn.dev/zozotech/articles/b9fabb31b3e876' target='_blank'>details要素を閉じる際にもCSSアニメーションを有効にする方法</a></span>  
+<span className={styles.tips__hanging}>・<a href='https://coliss.com/articles/build-websites/operation/css/prevent-scroll-chaining-overscroll-behavior.html' target='_blank'>CSSでスクロールが連鎖するのを回避する古い方法とoverscroll-behaviorを使った新しいテクニック</a></span>
+
+<br />
+<br />
+<br />
+
+<h2>●実装例withカスタム値</h2>
+
+```js
+const image = document.getElementById('image');
+
+image.addEventListener('command', (e) => {
+  if (e.command == '--rotate-left') {
+    e.target.style.rotate = '-90deg'
+  } else if (e.command == '--rotate-right') {
+    e.target.style.rotate = '90deg'
+  }
+})
+```
+```html
+<img id='image' src='...' />
+
+<button commandfor='image' command='--rotate-left'>左回転</button>
+<button commandfor='image' command='--rotate-right'>右回転</button>
+```
+```tsx
+export default function CustomCommandAttr() {
+
+  useEffect(() => {
+    const handleCommand = (e: Event) => {
+      if (!(e.target instanceof Element)) return
+
+      const commandElement = e.target.closest('[command][commandfor]')
+      if (!commandElement) return
+
+      const command = commandElement.getAttribute('command')
+      const commandFor = commandElement.getAttribute('commandfor')
+      if (!command || !commandFor) return
+
+      const commandTarget = document.getElementById(commandFor)
+      if (!commandTarget) return
+
+      switch (command) {
+        case '--rotate-left':
+          commandTarget.style.transform = 'rotate(-90deg)'
+          break
+        case '--rotate-right':
+          commandTarget.style.transform = 'rotate(90deg)'
+          break
+        case '--reset-rotate':
+          commandTarget.style.transform = 'rotate(0deg)'
+          break
+        default:
+          break
+      }
+    }
+
+    document.addEventListener('click', handleCommand)
+
+    return () => {
+      document.removeEventListener('click', handleCommand)
+    }
+  }, [])
+
+  return (
+    ...
+  )
+}
+```
+
+<br />
+<br />
+
+<h2>●お試しサンプル</h2>
+
+<CustomCommandAttr />

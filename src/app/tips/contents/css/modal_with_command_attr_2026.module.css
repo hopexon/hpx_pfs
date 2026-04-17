@@ -23,10 +23,19 @@
   button {
     padding: 0.25rem 1rem;
     text-align: center;
+    color: var(--black);
     background-color: oklch(from white l c h / 75%);
     border: 1px solid oklch(from black l c h / 50%);
     border-radius: 1rem;
     cursor: pointer;
+    transition: background-color, color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+
+    &:active {
+      color: var(--paper);
+      background-color: oklch(from black l c h / 90%);
+    }
   }
 }
 
@@ -50,6 +59,60 @@
   @media (any-hover: hover) {
     &:hover {
       opacity: 0.6;
+    }
+  }
+}
+
+.custom__command__wrap {
+  .custom__command__btn__wrap {
+    --grid-template-columns: auto;
+    --grid-template-rows: repeat(3, auto);
+    --column-gap: 0;
+    --row-gap: 1rem;
+
+    display: grid;
+    grid-template-columns: var(--grid-template-columns);
+    grid-template-rows: var(--grid-template-rows);
+    justify-content: center;
+    column-gap: var(--column-gap);
+    row-gap: var(--row-gap);
+
+    @media screen and (min-width: 768px) {
+      --grid-template-columns: repeat(3, calc((180/16) * 1rem));
+      --grid-template-rows: auto;
+      --column-gap: 1rem;
+      --row-gap: 0;
+    }
+  }
+
+  .custom__command__img {
+    display: block;
+    margin-block-start: 2rem;
+    margin-inline: auto;
+    width: calc((200 / 16) * 1rem);
+    transition: transform 0.1s ease-in-out;
+    transform: rotate(0deg);
+  }
+
+  .custom__command__btn__wrap {
+    margin-block-start: 2rem;
+  }
+
+  button {
+    padding: 0.25rem 1rem;
+    text-align: center;
+    color: var(--black);
+    background-color: oklch(from white l c h / 75%);
+    border: 1px solid oklch(from black l c h / 50%);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color, color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+
+    &:active {
+      color: var(--paper);
+      background-color: oklch(from black l c h / 90%);
     }
   }
 }

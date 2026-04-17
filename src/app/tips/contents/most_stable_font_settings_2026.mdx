@@ -1,5 +1,5 @@
 import FontSettings from '@/components/tips/FontSettings'
-import styles from '../[slug].module.css'
+import styles from '../tips.module.css'
 
 <FontSettings />
 
@@ -23,26 +23,42 @@ body {
 
 <br />
 
+<h3>●概要</h3>
+
 2026年時点で最も不具合のリスクを減らす`font-family`セット。
+
 <br />
-<h2>●各OSの和文 / 欧文フォント指定</h2>
-<p className='[text-indent:1em_hanging]'>・MacOS/iOS 欧文：`Helvetica Neue`</p>
-<p className='[text-indent:1em_hanging]'>・MacOS/iOS 和文：`Hiragino Kaku Gothic Pro N`およびフォールバックで`Hiragino Sans`</p>
-<p className='[text-indent:1em_hanging]'>・MacOS/iOS 和文：`Hiragino Kaku Gothic Pro N`およびフォールバックで`Hiragino Sans`</p>
-<p className='[text-indent:1em_hanging]'>・Windows 欧文：`Aerial Segoe UI`</p>
-<p className='[text-indent:1em_hanging]'>・Windows 和文：`Meiryo`または25年4月から対応の`Noto Sans JP` or `BIZ UDPGothic`</p>
-<p className='[text-indent:1em_hanging]'>・Android：`sans-serif`(端末ごとに使用が異なるため統一的な指定は不可能)</p>
+
+<h3>●各OSの和文 / 欧文フォント指定</h3>
+
+<div className={styles.tips__base__txt}>
+  <p className='[text-indent:1em_hanging]'>・MacOS/iOS 欧文：`Helvetica Neue`</p>
+  <p className='[text-indent:1em_hanging]'>・MacOS/iOS 和文：`Hiragino Kaku Gothic Pro N`およびフォールバックで`Hiragino Sans`</p>
+  <p className='[text-indent:1em_hanging]'>・MacOS/iOS 和文：`Hiragino Kaku Gothic Pro N`およびフォールバックで`Hiragino Sans`</p>
+  <p className='[text-indent:1em_hanging]'>・Windows 欧文：`Aerial Segoe UI`</p>
+  <p className='[text-indent:1em_hanging]'>・Windows 和文：`Meiryo`または25年4月から対応の`Noto Sans JP` or `BIZ UDPGothic`</p>
+  <p className='[text-indent:1em_hanging]'>・Android：`sans-serif`(端末ごとに使用が異なるため統一的な指定は不可能)</p>
+</div>
+
 <br />
+
 <h3>●sans serif とは</h3>
+
 各ブラウザエージェントにブラウザ指定を委ねる総称フォント。  
 ブラウザフォントを指定する。フォールバック用としてこちらの指定は必須。
+
 <br />
+
 <h3>●Noto Sans(JP)とは</h3>
+
 あらゆる環境で文字化け`(Tofu)`を発生させない`(Not Tofu)`ことを目的にMicrosoftにより開発されたフォント。  
 Windows11では25年4月からデバイスフォントとして搭載されているが、MacOS/iOSでは非搭載(Apple系での和文デフォルトはヒラギノ角ゴ)。  
 Apple系で Noto Sans JP を使用したい場合はGoogleまたはAdobeからWebフォントを引っ張ってくるしかない。
+
 <br />
+
 <h3>●Noto Sans Japaneseとは</h3>
+
 Google Fontsが提供するNoto Sans JP。  
 `font-family`上で指定する場合は`Japanese`ではなく`JP`となるため注意が必要。
 <a href='https://fonts.google.com/noto/specimen/Noto+Sans+JP?query=noto+sans' target='_blank'>https://fonts.google.com/noto/specimen/Noto+Sans+JP?query=noto+sans</a>

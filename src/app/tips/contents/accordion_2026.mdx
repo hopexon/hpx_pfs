@@ -48,16 +48,50 @@ summary::-webkit-details-marker {
 
 <br />
 
+<h2>●概要</h2>
+
 `::details-content`、`interpolate-size: allow-keywords`、`transition-behavior: allow-discrete`の3キーワードを軸にCSSのみでアニメーション付きアコーディオンを実装する方法。  
 iOS18.4より`details-content`内の`summary`以外のコンテンツを一括指定する疑似要素`::details-content`が使用可能となった。  
 またChromium129よりプログレッシブエンハンスメントとして「相対値に対してアニメーション、トランジションを可能とする」プロパティ`interpolate-size: allow-keywords`が使用可能となった。  
 この2点を加えることで、従来にアニメーション用`div`を必要としない(構造的汚染を持たない)アコーディオンアニメーションが可能となる。  
-非展開時の`::details-content`に`block-size: 0`をすることで展開時の`block-size: auto`に対し`interpolte-size`および`transition-behavior / property`で許可したアニメーションが実行される。  
+非展開時の`::details-content`に`block-size: 0`をすることで展開時の`block-size: auto`に対し`interpolte-size`および`transition-behavior / property`で許可したアニメーションが実行される。
+
+<br />
+<br />
+
+<h2>●注意点</h2>
+
+`interpolate-size`プロパティは iOS26 時点でも未対応のため、現状Chromium限定のプログレッシブ・エンハンスメントとなり2026年時点では実用的ではない。
+<br />
 ::details-content に対しては`overflow: clip`を指定しないとアコーディオンを開いた瞬間コンテンツ全体がアコーディオンを突き抜けてしまうので注意。
 <br />
-注意点として`interpolate-size`プロパティは iOS26 時点でも未対応のため、現状Chromium限定のプログレッシブ・エンハンスメントとなり2026年時点では実用的ではない。
+また iOS18.4 から対応となる`::details-content`および`allow-discrete`についても実務で使用可能かギリギリのため、フォールバックを必ず添えるか実務での使用自体を見送るべきである。
+
 <br />
-また iOS18.4 から対応となる`::etails-content`についても実務で使用可能かギリギリの範囲のため、現状 details-content に対し padding 等レイアウト関連のプロパティを追加すべきではない。
+<br />
+
+<h2>●キーワード</h2>
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●::details-content<br className='sp__only' /> - <span className={styles.tips__status__available}>Baseline2025 Newly Available</span></span>  
+`<summary>`を除く`<details>`要素内の`拡張/折りたたみ`可能なコンテンツを指定する疑似要素。  
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●transition-bahavior: allow-discrete<br className='sp__only' /> - <span className={styles.tips__status__available}>Baseline2024 Newly Available</span></span>  
+`display: block`から`none`、`content-visibility: visible`から`hidden`といった、リニアではなくイチからゼロにトグル式で切り替わる`離散的プロパティ`に対しリニアなアニメーションの実行を許可するキーワード。  
+例えば`::details-content`に対しフェードイン・アウトを実装する場合、`transition`に対し`opacity`および`content-visibility`を指定することで`opacityアニメーションの実行が終了してからcontent-visibilityの状態をトグルさせる`形で離散的プロパティに対するアニメーションを処理する。  
+なお現状`transition-behavior`プロパティは離散的プロパティへのアプローチのみ対応となっている。  
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●interpolate-size: allow-keywords<br className='sp__only' /> - <span className={styles.tips__status__available}>Limited Availability</span></span>  
+`相対値`や`auto / fit-content / max-content`といった固定値以外のサイズキーワードに対し`transition`等アニメーションの付与を許可するプロパティ。  
+`transform`などボックスモデル以外のCSSプロパティ(安直に書けば inline-size や block-size を伴わないもの)をアニメーション対象とすることは不可能。  
+MDNでは注意点として`既存サイトで雑に有効化すると「離散的プロパティはアニメーションしないもの」と前提で設計されたページを破壊する`可能性があると示唆している。  
+
+参照：  
+<span className={styles.tips__hanging}>・<a href='https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::details-content' target='_blank'>MDN - ::details-content</a></span>  
+<span className={styles.tips__hanging}>・<a href='https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Properties/transition-behavior' target='_blank'>MDN - transition-behavior</a></span>  
+<span className={styles.tips__hanging}>・<a href='https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Properties/interpolate-size' target='_blank'>MDN - interpolate-size</a></span >
+
+
+<br />
 
 <section className={exstyles.section__accordion__with__grid}>
   {Array.from({ length: 3 }).map((_, i) => (
@@ -111,6 +145,8 @@ details[open] {
 ```
 
 <br />
+
+<h2>●概要</h2>
 
 `grid-template-rows`に対して`transition`を効かせることでスライドトグルを実装する方法。  
 同じく`::details-content`の対応状況が 1OS18.4 以降のため実務上使用可能かはギリギリだが、プログレッシブエンハンスメントに頼りきりの上記実装例よりはマシといったところか。

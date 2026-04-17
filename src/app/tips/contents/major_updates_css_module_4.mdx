@@ -1,0 +1,64 @@
+import ModalWithCommandAttr from '@/components/tips/Modalwithcommandattr'
+import CustomCommandAttr from '@/components/tips/CustomCommandAttr'
+import styles from '../tips.module.css'
+import exstyles from '@/app/tips/contents/css/most_stable_font_settings_2026.module.css'
+
+<p className={`${exstyles.fontsettings__text}`}>
+  この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<br />
+<br />
+<br />
+
+<h2>●CJK含む文字送り設定は結局何が最適なの</h2>
+```css
+:where(:root) {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+  text-spacing-trim: trim-start;
+}
+```
+
+<br />
+<br />
+
+参照：  
+<span className={styles.tips__hanging}>・<a href='https://qiita.com/debiru/items/0a349bee3669b776d8e2' target='_blank'>Qiita - word-break: auto-phrase は貧弱なので word-break: keep-all を使うべし</a></span >  
+<span className={styles.tips__hanging}>・<a href='https://ics.media/entry/240411/' target='_blank'>ICS - 文章の折り返し指定のCSS</a></span >  
+<span className={styles.tips__hanging}>・<a href='https://ics.media/entry/241105/' target='_blank'>ICS - CSSで文節の折り返しを！ br・wbrとauto-phraseの活用術</a></span >
+
+<br />
+<br />
+
+<h2>●キーワード</h2>
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●text-spacing-trim: trim-start<br className='sp__only' /> - <span className={styles.tips__status__available}>Limited Availability</span></span>  
+CJKテキストにおいて、約物(句読点やカッコなど)と他の文字のの間のスペースを制御する。  
+`trim-start`を指定することで頻繁に指摘される行頭`" 「"`の余白が削除されるため、Safariでも対応が開始され次第スタンダードとなりそうなプロパティ。
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●word-break: auto-phrase<br className='sp__only' /> - <span className={styles.tips__status__available}>Limited Availability</span></span>  
+CSS Text Module Level 4 において追加されたキーワード。  
+CJKテキストについて、文節に適した折り返しを`機械学習を基にしたユーザエージェントの判断に委ねて`演算する。  
+あくまで他所に依存する処理のため、今後の学習次第だが意図した通りの挙動とならない場合がある。  
+後述の参照記事においては、`word-break: keep-all`プラス`overflow-wrap: anywhere`の組み合わせに対し良好な出力結果が得られないという結果になっている。
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●word-break: keep-all<br className='sp__only' /> - <span className={styles.tips__status__available}>Baseline Widely Available</span></span>  
+CJKテキストの改行を`許可しない`。CJK以外のテキストについては`normal`と同等。  
+和文を用いる場合一見不適切なキーワードに思えるが、検証では `overflow-wrap: anywhere`と組み合わせることで`auto-phrase`より好ましい結果を獲得している。
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●overflow-wrap: anywhere<br className='sp__only' /> - <span className={styles.tips__status__available}>Baseline Widely Anywhere</span></span>  
+旧プロパティ名：`word-wrap`  
+インラインテキストが行ボックスから溢れそうになった際に、ユーザエージェント側では分割できない文字列について`任意の場所で折り返す`可能性を設ける。  
+`break-word`キーワードとの違いは、実際に折り返しされた際にコンテンツの最小固有寸法に対して`折り返しで生じた余白を考慮する`のが`anywhere`、考慮しないのが`word-break`となる。
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●text-wrap: balance<br className='sp__only' /> - <span className={styles.tips__status__available}>Baseline2024 Newly Available</span></span>  
+短いテキストが複数行存在するブロックに対し、各行の文字数バランスが整うよう制御する。  
+端末リソースに一定の負荷がかかるため`Chromiumでは6行`、`Firefoxでは10行`と適用限界が定められている。
+
+<span className={`${styles.tips__keywords__ttl} ${styles.tips__hanging}`}>●text-wrap: pretty<br className='sp__only' /> - <span className={styles.tips__status__available}>Limited Availability</span></span>  
+`balance`に対して長文を保有するブロックに対し、全体にバランスの取れた改行位置を演算するキーワード。  
+具体的にはブラウザに対し`負荷よりも美しさ`を優先するよう指示する。  
+これまた端末に一定の負荷がかかるため、何よりもレイアウトを優先する場合に適用すべし……とされているが、負荷の度合いがわからないため当サイトではとりあえず全体に適用している。
